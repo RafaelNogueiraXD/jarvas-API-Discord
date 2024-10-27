@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "jarvas_api_discord"
+version = "0.1.0"
+description = "API do discord"
+authors = ["Rafael Nogueira Rodrigues"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.3"
+uvicorn = "^0.32.0"
+discord = "^2.3.2"
+python-dotenv = "^1.0.1"
+httpx = "^0.27.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+pytest-asyncio = "^0.24.0"
+pytest-mock = "^3.14.0"
+taskipy = "^1.14.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.taskipy]
+[tool.taskipy.tasks]
+start = "uvicorn jarvas_api_discord.main:app --reload"
+test = "pytest -v --tb=short --durations=0"
