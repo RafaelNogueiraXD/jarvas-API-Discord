@@ -20,3 +20,14 @@ async def test_send_discord_message():
 
    
     client.send_message.assert_called_once_with("Mensagem enviada via API HTTP!")
+
+
+@pytest.mark.asyncio
+async def test_send_discord_different_message():
+    response = client_api.post(
+        "/",
+        json={'msg': "ola , estou criando uma nova mensagem" }
+    )
+    assert response.status_code == 200
+    assert response.json() == {"detail": "Mensagem enviada com sucesso!"}
+

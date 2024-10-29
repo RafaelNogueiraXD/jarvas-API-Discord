@@ -2,7 +2,7 @@ import discord
 from jarvas_api_discord.settings import load_config_general_id_channel, load_config_bot_token
 from fastapi import FastAPI, HTTPException
 import asyncio
-
+from jarvas_api_discord.models import Message
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -41,6 +41,13 @@ async def send_discord_message():
     """Rota que envia uma mensagem para o canal Discord."""
     message = "Mensagem enviada via API HTTP!"
     success = await client.send_message(message)
+    if not success:
+        raise HTTPException(status_code=500, detail="Falha ao enviar mensagem.")
+    return {"detail": "Mensagem enviada com sucesso!"}
+
+@app.post("/")
+async def send_discord_diferent_message(message: Message):
+    success = await client.send_message(message.msg)
     if not success:
         raise HTTPException(status_code=500, detail="Falha ao enviar mensagem.")
     return {"detail": "Mensagem enviada com sucesso!"}
