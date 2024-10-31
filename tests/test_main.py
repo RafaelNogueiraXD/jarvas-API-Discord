@@ -2,6 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import AsyncMock, MagicMock
 from jarvas_api_discord.main import app, client 
+from jarvas_api_discord.settings import load_config_general_id_channel
 
 client_api = TestClient(app)
 
@@ -26,7 +27,11 @@ async def test_send_discord_message():
 async def test_send_discord_different_message():
     response = client_api.post(
         "/",
-        json={'msg': "ola , estou criando uma nova mensagem" }
+        json={
+            "name": "Nome app de teste",
+            "message": "essa é uma mensagem do app",
+            "id_channel": load_config_general_id_channel()
+         }
     )
     assert response.status_code == 200
     assert response.json() == {"detail": "Mensagem enviada com sucesso!"}

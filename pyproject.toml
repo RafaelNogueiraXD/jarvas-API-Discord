@@ -12,6 +12,7 @@ uvicorn = "^0.32.0"
 discord = "^2.3.2"
 python-dotenv = "^1.0.1"
 httpx = "^0.27.2"
+taskipy = "^1.14.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -27,5 +28,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.taskipy]
 [tool.taskipy.tasks]
-start = "uvicorn jarvas_api_discord.main:app --reload"
+run = "uvicorn jarvas_api_discord.main:app --host 127.0.0.1 --port 8001 --reload "
 test = "pytest -v --tb=short --durations=0"
