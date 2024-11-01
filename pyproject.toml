@@ -28,5 +28,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.taskipy]
 [tool.taskipy.tasks]
-run = "uvicorn jarvas_api_discord.main:app --host 127.0.0.1 --port 8001 --reload "
+run = "uvicorn jarvas_api_discord.main:app --host 127.0.0.1 --port 8001 --reload"
 test = "pytest -v --tb=short --durations=0"

@@ -62,14 +62,14 @@ async def startup_event():
 async def send_default_message():
     """Rota que envia uma mensagem para o canal Discord."""
     message = "Mensagem enviada via API HTTP!"
-    success = await client.send_embed_message(name="teste", status="a aplicação está em teste")
+    success = await client.send_simple_message("a aplicação está em teste")
     if not success:
         raise HTTPException(status_code=500, detail="Falha ao enviar mensagem.")
     return {"detail": "Mensagem enviada com sucesso!"}
 
 @app.post("/")
 async def send_custom_message(message: ChannelMessage):
-    client.channel_id = message.id_channel
+    client.channel_id = int(message.id_channel)
     success = await client.send_embed_message(
         name=message.name,
         status=message.message
